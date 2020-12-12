@@ -1,35 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define MAX_RAM 1024
+#define MAX_TEXTO 100
+#define TAM_DIR 5
+#define NUM_LINEAS 4
 
 typedef struct{
 	short int ETQ;
 	short int Datos[8];
 } T_LINEA_CACHE;
 
-void acierto(int hex);
-void fallo(int hex, unsigned char RAM[1024],T_LINEA_CACHE *cache, int *numFallos, int *tiempoglobal);
+void acierto(int hex, unsigned char RAM[], int *tiempoglobal, char *texto);
+void fallo(int hex, unsigned char RAM[],T_LINEA_CACHE *cache, int *numfallos, int *tiempoglobal, char *texto);
+void printCache(T_LINEA_CACHE cache[]);
+void resetCache(T_LINEA_CACHE *cache);
 
 void main(){
 
 
-	T_LINEA_CACHE cache[4];
+	T_LINEA_CACHE cache[NUM_LINEAS];
 
 
 	//Pongo las etiquetas a 0xFF y los datos a 0 de la cache
-
-	int i,j;
-
-	for(i=0; i<4; i++){
-		cache[i].ETQ = 0xFF;
-		for(j=0; j<8; j++){
-			cache[i].Datos[j] = 0;
-		}
-	}
+	resetCache(cache);
 
 	//Se lee los datos de RAM.bin y se meten en la variable RAM
 	
 	FILE *datosRAM;
-	unsigned char RAM[1024];
+	unsigned char RAM[MAX_RAM];
 
 	datosRAM = fopen("RAM.bin", "r");
 	//Compruebo que existe
@@ -38,7 +39,7 @@ void main(){
 		exit(-1);
 	}
 
-	fgets(RAM, 1024, (FILE*)datosRAM);
+	fgets(RAM, MAX_RAM, (FILE*)datosRAM);
 	
 	fclose(datosRAM);
 
@@ -53,76 +54,89 @@ void main(){
 		exit(-1);
 	}
 		
-	char accesos_memoria[5];
+	char accesos_memoria[TAM_DIR];
 
 	//Creo las variables que faltan
 
-	int hex, tiempoglobal=0, numfallos=0;
-
+	int hex, tiempoglobal=0, numfallos=0, accesos;
+	char texto[MAX_TEXTO];
+	strcpy(texto, "");
 	//Empieza el simulador
 
-	while(1){
-		if(fgets(accesos_memoria,7,Faccesos_memoria)==NULL){
-			break; //Esto es para cuando termine
-		}
+	for(accesos=0;fgets(accesos_memoria,7,Faccesos_memoria)!=NULL; accesos++){
 		
 		hex = (int)strtol(accesos_memoria, NULL, 16); //Hex es la direccion de memoria
 
 		//Compruebo si ya esta cargado
 		
+		tiempoglobal++;
+		
 		if(cache[hex>>3&3].ETQ == hex>>5&31){
-			printf("\n[CARGADO]");
-			
-			acierto(hex);
 
+			acierto(hex, RAM, &tiempoglobal, texto);
 		}else{
-			printf("\n[NO CARGADO]\n");
-			fallo(hex, RAM, &cache[hex>>3&3], &numfallos, &tiempoglobal);
+			fallo(hex, RAM, &cache[hex>>3&3], &numfallos, &tiempoglobal, texto);
+			
+			acierto(hex, RAM, &tiempoglobal, texto);
 		}
-
-		for(i=0; i<4; i++){
-			printf("\nETQ: %02X   Datos: ", cache[i].ETQ);
-			for(j=0; j<8; j++){
-				printf("%02X ", cache[i].Datos[j]);
-			}
-		}
-		
-		
-		printf("\n\nETQ: %02X   Linea: %02X   Palabra: %02X   Bloque: %02X\n", hex>>5&31, hex>>3&3, hex&7, hex>>3&127);
-
+	
+		printCache(cache);
+		sleep(2);
 	}
 
+	printf("\n\nNumero total de accesos: %d, numero de fallos: %d, tiempo medio de accesos: %.2f", accesos, numfallos, ((float) tiempoglobal/accesos), tiempoglobal);
+	printf("\n\nTexto: %s", texto);
+
 }
 
 
-void acierto(int hex){
-	return;
+void acierto(int hex, unsigned char RAM[], int *tiempoglobal, char *texto){
+	char buff[3];
+	buff[0]=RAM[((hex>>3&127)*8)+(hex&7)];
+	strncat(texto,  buff, 1);
+
+	printf("\n\nT: %d, Acierto de CACHE, ADDR %04X ETQ %X Linea %02X Palabra %02X DATO %02X\n", *tiempoglobal, hex, hex>>5&31, hex>>3&3, hex&7, RAM[((hex>>3&127)*8)+(hex&7)]);
 }
 
-void fallo(int hex,unsigned char RAM[1024], T_LINEA_CACHE *cache, int *numFallos, int *tiempoglobal){
-	*numFallos++;
-	*tiempoglobal=+10;
-	
+void fallo(int hex,unsigned char RAM[], T_LINEA_CACHE *cache, int *numfallos, int *tiempoglobal, char *texto){
+	*numfallos = *numfallos + 1;
 	int bloque = (hex>>3&127) * 8;
 
-	printf("T: %d, Fallo de CACHE %d, ADDR %04X ETQ %X Linea %02X Palabra %02X Bloque %02X", *tiempoglobal, *numFallos, hex, hex>>5&31, hex>>3&3, hex&7, hex>>3&127);
+	printf("\n\nT: %d, Fallo de CACHE %d, ADDR %04X ETQ %X Linea %02X Palabra %02X Bloque %02X", *tiempoglobal, *numfallos, hex, hex>>5&31, hex>>3&3, hex&7, bloque);
+	
+	*tiempoglobal+=10;
+
 	printf("\nCargando el bloque %02X en la linea %02X", hex>>3&127, hex>>3&3);
 
 	cache->ETQ = hex>>5&31;
-	printf("\n");
 	int i;
 	for(i=7; i>-1; i--){
 		cache->Datos[i] = RAM[bloque+7-i];
 	}
-	
-	
 
+}
 
+void printCache(T_LINEA_CACHE cache[]){
+	int i,j;
 
+	for(i=0; i<4; i++){
+		printf("\nETQ: %02X   Datos: ", cache[i].ETQ);
+		for(j=0; j<8; j++){
+			printf("%02X ", cache[i].Datos[j]);
+		}
+	}
 
-
-
-	return;
 }
 
 
+void resetCache(T_LINEA_CACHE *cache){
+
+	int i,j;
+
+	for(i=0; i<4; i++){
+		cache[i].ETQ = 0xFF;
+		for(j=0; j<8; j++){
+			cache[i].Datos[j] = 0;
+		}
+	}
+}
