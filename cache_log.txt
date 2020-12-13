@@ -1,0 +1,105 @@
+
+T: 1, Fallo de CACHE 1, ADDR 02E4 ETQ 17 Linea 00 Palabra 04 Bloque 2E0
+Cargando el bloque 5C en la linea 00
+T: 11, Acierto de CACHE, ADDR 02E4 ETQ 17 Linea 00 Palabra 04 DATO 70
+
+ETQ: 17   Datos: 73 72 71 70 6F 6E 6D 6C 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 12, Fallo de CACHE 2, ADDR 0200 ETQ 10 Linea 00 Palabra 00 Bloque 200
+Cargando el bloque 40 en la linea 00
+T: 22, Acierto de CACHE, ADDR 0200 ETQ 10 Linea 00 Palabra 00 DATO 6D
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 23, Fallo de CACHE 3, ADDR 0208 ETQ 10 Linea 01 Palabra 00 Bloque 208
+Cargando el bloque 41 en la linea 01
+T: 33, Acierto de CACHE, ADDR 0208 ETQ 10 Linea 01 Palabra 00 DATO 75
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 10   Datos: 63 62 61 79 78 77 76 75 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 34, Fallo de CACHE 4, ADDR 0109 ETQ 8 Linea 01 Palabra 01 Bloque 108
+Cargando el bloque 21 en la linea 01
+T: 44, Acierto de CACHE, ADDR 0109 ETQ 8 Linea 01 Palabra 01 DATO 70
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 08   Datos: 76 75 74 73 72 71 70 6F 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 45, Acierto de CACHE, ADDR 010A ETQ 8 Linea 01 Palabra 02 DATO 71
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 08   Datos: 76 75 74 73 72 71 70 6F 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 46, Fallo de CACHE 5, ADDR 020B ETQ 10 Linea 01 Palabra 03 Bloque 208
+Cargando el bloque 41 en la linea 01
+T: 56, Acierto de CACHE, ADDR 020B ETQ 10 Linea 01 Palabra 03 DATO 78
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 10   Datos: 63 62 61 79 78 77 76 75 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 57, Acierto de CACHE, ADDR 0209 ETQ 10 Linea 01 Palabra 01 DATO 76
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 10   Datos: 63 62 61 79 78 77 76 75 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+
+T: 58, Fallo de CACHE 6, ADDR 001C ETQ 0 Linea 03 Palabra 04 Bloque 18
+Cargando el bloque 03 en la linea 03
+T: 68, Acierto de CACHE, ADDR 001C ETQ 0 Linea 03 Palabra 04 DATO 64
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 10   Datos: 63 62 61 79 78 77 76 75 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: 00   Datos: 67 66 65 64 63 62 61 79 
+
+T: 69, Acierto de CACHE, ADDR 001D ETQ 0 Linea 03 Palabra 05 DATO 65
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 10   Datos: 63 62 61 79 78 77 76 75 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: 00   Datos: 67 66 65 64 63 62 61 79 
+
+T: 70, Fallo de CACHE 7, ADDR 030B ETQ 18 Linea 01 Palabra 03 Bloque 308
+Cargando el bloque 61 en la linea 01
+T: 80, Acierto de CACHE, ADDR 030B ETQ 18 Linea 01 Palabra 03 DATO 65
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 18   Datos: 69 68 67 66 65 64 63 62 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: 00   Datos: 67 66 65 64 63 62 61 79 
+
+T: 81, Acierto de CACHE, ADDR 030F ETQ 18 Linea 01 Palabra 07 DATO 69
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 18   Datos: 69 68 67 66 65 64 63 62 
+ETQ: FF   Datos: 00 00 00 00 00 00 00 00 
+ETQ: 00   Datos: 67 66 65 64 63 62 61 79 
+
+T: 82, Fallo de CACHE 8, ADDR 0010 ETQ 0 Linea 02 Palabra 00 Bloque 10
+Cargando el bloque 02 en la linea 02
+T: 92, Acierto de CACHE, ADDR 0010 ETQ 0 Linea 02 Palabra 00 DATO 71
+
+ETQ: 10   Datos: 74 73 72 71 70 6F 6E 6D 
+ETQ: 18   Datos: 69 68 67 66 65 64 63 62 
+ETQ: 00   Datos: 78 77 76 75 74 73 72 71 
+ETQ: 00   Datos: 67 66 65 64 63 62 61 79 
+
+
+Numero total de accesos: 12, numero de fallos: 8, tiempo medio de accesos: 7.67
+
+Texto: pmupqxvdeeiq

@@ -92,7 +92,7 @@ void acierto(int hex, unsigned char RAM[], int *tiempoglobal, char *texto){
 	buff[0]=RAM[((hex>>3&127)*8)+(hex&7)];
 	strncat(texto,  buff, 1);
 
-	printf("\n\nT: %d, Acierto de CACHE, ADDR %04X ETQ %X Linea %02X Palabra %02X DATO %02X\n", *tiempoglobal, hex, hex>>5&31, hex>>3&3, hex&7, RAM[((hex>>3&127)*8)+(hex&7)]);
+	printf("\nT: %d, Acierto de CACHE, ADDR %04X ETQ %X Linea %02X Palabra %02X DATO %02X\n", *tiempoglobal, hex, hex>>5&31, hex>>3&3, hex&7, RAM[((hex>>3&127)*8)+(hex&7)]);
 }
 
 void fallo(int hex,unsigned char RAM[], T_LINEA_CACHE *cache, int *numfallos, int *tiempoglobal, char *texto){
@@ -101,7 +101,7 @@ void fallo(int hex,unsigned char RAM[], T_LINEA_CACHE *cache, int *numfallos, in
 	*numfallos = *numfallos + 1;
 	int bloque = (hex>>3&127) * 8;
 
-	printf("\n\nT: %d, Fallo de CACHE %d, ADDR %04X ETQ %X Linea %02X Palabra %02X Bloque %02X", *tiempoglobal, *numfallos, hex, hex>>5&31, hex>>3&3, hex&7, bloque);
+	printf("\nT: %d, Fallo de CACHE %d, ADDR %04X ETQ %X Linea %02X Palabra %02X Bloque %02X", *tiempoglobal, *numfallos, hex, hex>>5&31, hex>>3&3, hex&7, bloque);
 	
 	*tiempoglobal+=10;
 
@@ -125,6 +125,7 @@ void printCache(T_LINEA_CACHE cache[]){
 			printf("%02X ", cache[i].Datos[j]);
 		}
 	}
+	printf("\n");
 }
 
 void resetCache(T_LINEA_CACHE *cache){
